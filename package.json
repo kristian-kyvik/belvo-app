@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "belvo": "^0.6.1",
+    "cors": "^2.8.5",
     "next": "latest",
     "react": "^16.14.0",
     "react-dom": "^16.8.6",
