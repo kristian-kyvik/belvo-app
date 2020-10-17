@@ -7,13 +7,17 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Index() {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ institutionsData: [], linksData: [] });
   
   useEffect(() => {
     const asyncFetchLinks = async () => {
-      const res = await fetch('/api/links')
-      const data = await res.json()
-      setData(data);
+      const linksRes = await fetch('/api/links')
+      const linksData = await linksRes.json()
+
+      const institutionsRes = await fetch('/api/institutions')
+      const institutionsData = await institutionsRes.json()
+      
+      setData({ linksData, institutionsData });
     }
 
     asyncFetchLinks();
@@ -54,39 +58,37 @@ export default function Index() {
     }).build();
   }
 
+  const getInstitution = (institution) => data.institutionsData.find(i => i.name == institution)
+
   //if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
-
-  console.log('data', data)
-
+  // if (!data) return <div>Loading...</div>
+  console.log(data)
   return (
-    <div>
-      <Head>
-        <title>Belvo app</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        {
-          //<script src="https://cdn.belvo.io/belvo-widget-1-stable.js" async></script>
-        }
-        <script src="https://cdn.belvo.io/belvo-widget-sandbox-1-stable.js"></script>
-      </Head>
+    <div className="container py-16 mx-auto flex flex-wrap">
       <div id="belvo"></div>
-      <button onClick={openBelvoWidget}>Add bank account</button>
-      <h2>Existing links</h2>
-      <ul>
-        {data.map((link) => (
-          <li key={link.id}>
-            <Link href="/banks/[id]" as={`/banks/${link.id}`}>
-              <div>
-                <div>id: {link.id}</div>
-                <div>institution: {link.institution}</div>
-                <div>access_mode: {link.access_mode}</div>
-                <div>last_accesed_at: {link.last_accesed_at}</div>
-                <div>status: {link.status}</div>
+      <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
+        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Existing links</h1>
+        <p className="lg:w-1/2 w-full leading-relaxed text-base">asymmetrical gentrify, subway tile poke farm-to-table.</p>
+        <a className="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={openBelvoWidget}>Add bank account</a>
+      </div>
+      <div className="flex flex-wrap -m-4">
+        {data.linksData.map((link) => (
+          <Link key={link.id} href="/banks/[id]" as={`/banks/${link.id}`}>
+            <div className="xl:w-1/3 md:w-1/2 p-4">
+              <div className="border border-gray-300 p-6 rounded-lg">
+                <div className="w-16 h-16 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                  <img src={getInstitution(link.institution).logo}/>
+                </div>
+                <h2 className="text-lg text-gray-900 font-medium title-font mb-2">{getInstitution(link.institution).display_name}</h2>
+                <p className="leading-relaxed text-large">{link.id}</p>
+                <span className="leading-relaxed text-small">{link.access_mode} {link.last_accesed_at} {link.status}</span>
               </div>
-            </Link>
-          </li>
+            </div>
+          </Link>
         ))}
-      </ul>
+        
+        
+      </div>
     </div>
   )
 }
