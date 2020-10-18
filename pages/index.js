@@ -29,10 +29,10 @@ export default function Index() {
   //  console.log('event data', data)
   // }
   
-  // const onExitCallbackFunction = (data) => {
-  //  // Do something with the exit data
-  //  console.log('exit data', data)
-  // }
+  const onExitCallbackFunction = (data) => {
+   // Do something with the exit data
+   console.log('exit data', data)
+  }
   
   // const successCallbackFunction = (link_id, institution) => {
   //  // Do something with the link_id or institution name
