@@ -59,11 +59,17 @@ export default function Index() {
     }).build();
   }
 
+  const linkIcon = (
+    <svg className="h-4 w-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+    </svg>
+  )
+
   const getInstitution = (institution) => data.institutionsData.find(i => i.name == institution)
 
   //if (error) return <div>Failed to load</div>
   
-  console.log('data', data)
+  console.log('DATA LINKS PAGE', data)
 
   return (
     <div className="container py-16 mx-auto flex flex-wrap">
@@ -87,7 +93,7 @@ export default function Index() {
                 <img src={getInstitution(link.institution).logo}/>
               </div>
               <Link key={link.id} href="/banks/[id]" as={`/banks/${link.id}`}>
-                <h2 className="text-lg hover:cursor-pointer text-gray-900 font-medium title-font mb-3">{getInstitution(link.institution).display_name}</h2>
+                <h2 className="text-lg hover:cursor-pointer text-gray-900 font-medium title-font mb-3">{getInstitution(link.institution).display_name} {linkIcon}</h2>
               </Link>
               <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${link.status === 'valid' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                 {link.status}

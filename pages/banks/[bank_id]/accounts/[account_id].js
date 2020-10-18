@@ -31,7 +31,8 @@ export default function Index() {
       }
     }, [router]);
 
-  console.log('data', data)
+    console.log('DATA TRANSACTION PAGE', data)
+
   return (
     <div className="container py-16 mx-auto">
       <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
