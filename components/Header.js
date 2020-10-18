@@ -27,7 +27,7 @@ export default function Header(props) {
         <div className="space-y-1 w-40 flex-1 flex items-center">
           <select className='font-light text-md p-1 w-24 sm:w-40 rounded-sm' onChange={(e) => console.log('select')}>
             {
-              ['Banks', "Fiscal"].map((doc, i) => (
+              ['Banks', "Fiscal (Coming soon)", "Gig (Coming soon)"].map((doc, i) => (
                 <option key={doc} value={i}>{doc}</option>
               ))
             }

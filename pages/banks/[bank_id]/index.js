@@ -88,7 +88,9 @@ export default function Index() {
                 </div>
                 <Link key={account.id} href="/banks/[bank_id]/accounts/[account_id]" as={`/banks/${bank_id}/accounts/${account.id}`}>
                   <div>
-                    <h2 className="text-lg text-gray-900 font-medium title-font">{account.name} {linkIcon}</h2>
+                    <a>                    
+                      <h2 className="text-lg text-gray-900 font-medium title-font">{account.name} {linkIcon}</h2>
+                    </a>
                   </div>
                 </Link>
                 <span className="leading-relaxed text-gray-600 text-small">{account.currency}</span>

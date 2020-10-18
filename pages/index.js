@@ -92,8 +92,10 @@ export default function Index() {
               <div className="w-16 h-16 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
                 <img src={getInstitution(link.institution).logo}/>
               </div>
-              <Link key={link.id} href="/banks/[id]" as={`/banks/${link.id}`}>
-                <h2 className="text-lg hover:cursor-pointer text-gray-900 font-medium title-font mb-3">{getInstitution(link.institution).display_name} {linkIcon}</h2>
+              <Link className="" key={link.id} href="/banks/[id]" as={`/banks/${link.id}`}>
+                <a>
+                  <h2 className="text-lg text-gray-900 font-medium title-font mb-3">{getInstitution(link.institution).display_name} {linkIcon}</h2>
+                </a>
               </Link>
               <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${link.status === 'valid' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                 {link.status}
