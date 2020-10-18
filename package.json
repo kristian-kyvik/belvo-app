@@ -12,6 +12,7 @@
     "next": "latest",
     "react": "^16.14.0",
     "react-dom": "^16.8.6",
+    "react-json-view": "^1.19.1",
     "swr": "^0.1.18"
   },
   "devDependencies": {

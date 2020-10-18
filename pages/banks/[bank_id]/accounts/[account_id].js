@@ -3,11 +3,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react';
 import Spinner from "../../../../components/Spinner";
+import SlidePanel from "../../../../components/SlidePanel";
 
 export default function Index() {
   const router = useRouter()
   const { bank_id } = router.query
   const [data, setData] = useState({ transactionsData: null });
+  const [sidePanelState, setSidePanelState] = useState(false);
+  const [sidePanelJSON, setSidePanelJSON] = useState({});
 
     useEffect(() => {
       const fetchData = async () => {
@@ -33,7 +36,7 @@ export default function Index() {
     <div className="container py-16 mx-auto">
       <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Transactions</h1>
-        <p className="lg:w-1/2 w-full leading-relaxed text-base">asymmetrical gentrify, subway tile poke farm-to-table.</p>
+        <p className="lg:w-1/2 w-full leading-relaxed text-base">Here is an overview over your last transactions</p>
       </div>
       <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -43,16 +46,22 @@ export default function Index() {
                 <thead>
                   <tr>
                     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                      Name
+                      Transaction id
                     </th>
                     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                      Title
+                      Date
                     </th>
                     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                       Status
                     </th>
                     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                      Role
+                      Currency
+                    </th>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                      Ammount
+                    </th>
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                      Inspect
                     </th>
                     <th class="px-6 py-3 bg-gray-50"></th>
                   </tr>
@@ -63,9 +72,6 @@ export default function Index() {
                     <tr>
                       <td class="px-6 py-4 whitespace-no-wrap">
                         <div class="flex items-center">
-                          <div class="flex-shrink-0 h-10 w-10">
-                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60" alt=""/>
-                          </div>
                           <div class="ml-4">
                             <div class="text-sm leading-5 font-medium text-gray-900">
                               {t.id}
@@ -74,7 +80,7 @@ export default function Index() {
                         </div>
                       </td>
                       <td class="px-6 py-4 whitespace-no-wrap">
-                        <div class="text-sm leading-5 text-gray-900">{t.reference}</div>
+                        <div class="text-sm leading-5 text-gray-900">{t.value_date}</div>
                       </td>
                       <td class="px-6 py-4 whitespace-no-wrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -87,6 +93,12 @@ export default function Index() {
                       <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                         <a href="#" class="text-indigo-600 hover:text-indigo-900">{t.amount}</a>
                       </td>
+                      <td class="px-6 py-4 whitespace-no-wrap">
+                        <svg className="h-5 w-5 mx-3 text-gray-600 hover:text-indigo-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" onClick={() => { setSidePanelJSON(t); setSidePanelState(true); }}>
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -95,6 +107,7 @@ export default function Index() {
           </div>
         </div>
       </div>
+      <SlidePanel open={sidePanelState} handler={setSidePanelState} JSON={sidePanelJSON}/>
     </div>
   )
 }
