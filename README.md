@@ -5,3 +5,4 @@ Please note:
 - All the data retrieved from the sandbox env
 - Fiscal data is mocked
 - Clicking on diabled links will break the app
+- Transactions are not being filtered
