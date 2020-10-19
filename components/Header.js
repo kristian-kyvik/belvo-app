@@ -18,21 +18,12 @@ export default function Header(props) {
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <Link href={`/`}>
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 cursor-pointer">
                 <img className="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-on-dark.svg" alt="Workflow logo"/>
-                <img className="hidden lg:block h-10 w-auto" src="/belvo.png" alt="belvo logo"/>
+                <img className="hidden lg:block h-5 w-auto" src="/belvo_gray.png" alt="belvo logo"/>
               </div>
             </Link>
           </div>
-        <div className="space-y-1 w-40 flex-1 flex items-center">
-          <select className='font-light text-md p-1 w-24 sm:w-40 rounded-sm' onChange={(e) => console.log('select')}>
-            {
-              ['Banks', "Fiscal (Coming soon)", "Gig (Coming soon)"].map((doc, i) => (
-                <option key={doc} value={i}>{doc}</option>
-              ))
-            }
-          </select>
-        </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <div className="ml-3 relative">
               <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1584518969469-c2d99c7760a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" alt=""/>
